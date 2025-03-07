@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px", background: "#6200ea", color: "white" }}>
-      <h2>Mental Health Chatbot</h2>
-      <div>
-        <Link to="/" style={{ color: "white", marginRight: "10px" }}>Home</Link>
-        <Link to="/login" style={{ color: "white", marginRight: "10px" }}>Login</Link>
-        <Link to="/register" style={{ color: "white" }}>Register</Link>
+    <nav className="bg-purple-600 p-4 text-white">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold">Mental Health Chatbot</Link>
+        <div className="space-x-4">
+          <Link to="/" className="hover:text-gray-300">Home</Link>
+          <Link to="/login" className="hover:text-gray-300">Login</Link>
+          <Link to="/register" className="hover:text-gray-300">Register</Link>
+        </div>
       </div>
     </nav>
   );
