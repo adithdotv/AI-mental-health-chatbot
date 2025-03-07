@@ -16,7 +16,7 @@ const Login = () => {
       const res = await axios.post("http://localhost:5000/api/auth/login", formData);
       localStorage.setItem("token", res.data.token);
       alert("Login successful");
-      navigate("/");
+      navigate("/chat");
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
     }
