@@ -31,6 +31,7 @@ const Chat = () => {
         { headers: { Authorization: token } }
       );
 
+      console.log(res.data)
       setMessages(res.data.messages);
       setInput("");
     } catch (error) {

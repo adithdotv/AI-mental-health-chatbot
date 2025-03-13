@@ -1,8 +1,13 @@
 const express = require("express");
 const Chat = require("../models/Chat");
 const authMiddleware = require("../middleware/authMiddleware");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config()
 
 const router = express.Router();
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Fetch chat history
 router.get("/", authMiddleware, async (req, res) => {
@@ -24,7 +29,13 @@ router.post("/", authMiddleware, async (req, res) => {
       chat = new Chat({ userId: req.user.userId, messages: [] });
     }
 
+    
     chat.messages.push({ text, sender: "user" });
+    const result = await model.generateContent(text);
+    const answer = result.response.text()
+
+    chat.messages.push({ text: answer, sender: "bot" });
+
     await chat.save();
 
     res.json(chat);
